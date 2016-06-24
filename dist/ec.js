@@ -30895,6 +30895,10 @@ return self})();
             return services.data.get();
         }
 
+        function triggerUpdate() {
+            services.data.triggerUpdate();
+        }
+
         // data csv
         function setDataCSV(csv) {
             services.data.setCSV(csv);
@@ -30947,11 +30951,11 @@ return self})();
         function getConfig() {
             return services.config.getRaw();
         }
-        
+
         function getConfigAndData(){
             return services.config.get();
         }
-        
+
         function getConfigStringified() {
             return services.config.getStringified();
         }
@@ -30975,6 +30979,7 @@ return self})();
         return {
             setData: setData,
             getData: getData,
+            triggerUpdate: triggerUpdate,
             setDataUrl: setDataUrl,
             getDataUrl: getDataUrl,
             setDataCSV: setDataCSV,
@@ -31291,6 +31296,11 @@ return self})();
                 mediator.trigger('dataUpdate', data);
                 dataUrl = undefined;
             }
+        };
+
+        that.triggerUpdate = function () {
+          var data = that.get();
+          mediator.trigger('dataUpdate', data);
         };
 
         that.revert = function(oldDataSet){

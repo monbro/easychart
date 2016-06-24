@@ -17085,6 +17085,11 @@ function extend() {
             }
         };
 
+        that.triggerUpdate = function () {
+          var data = that.get();
+          mediator.trigger('dataUpdate', data);
+        };
+
         that.revert = function(oldDataSet){
             if (!_.isEqual(dataSet, oldDataSet)) {
                 dataSet = oldDataSet;
